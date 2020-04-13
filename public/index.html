@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>furikake</title>
+
+<!--   <script>
+    var canvas = document.getElementById("cvs");
+    // var ctx = canvas.getContext("2d");
+    var imgCnt = 25;  // 描画する画像の数
+    var imgArray = [];  // 画像の情報を格納
+    var cvsw = 800;   // canvasタグに指定したwidth
+    var cvsh = 500;   // canvasタグに指定したheight
+    // var imgBaseSizeW = 15;    // 画像の基本サイズ横幅
+    // var imgBaseSizeH = 18.5;  // 画像の基本サイズ立幅
+
+    // 今回は画像じゃなくてCSSでやる
+      // 画像の読み込み
+      // var img = new Image();
+      // img.src = "./images/sakura.png";
+      // img.onload = flow_start;
+
+    ctx.beginPath();
+    ctx.movaPath(10,10);
+    ctx.lineTo(10,20);
+    ctx.stroke();
+
+  if (canvas.getContext) {
+    var context = canvas.getContext('2d');
+    //ここに具体的な描画内容を指定する
+    //新しいパスを開始する
+    context.beginPath();
+    //パスの開始座標を指定する
+    context.moveTo(100,20);
+    //座標を指定してラインを引いていく
+    context.lineTo(150,100);
+    context.lineTo(50,100);
+    //パスを閉じる（最後の座標から開始座標に向けてラインを引く）
+    context.closePath();
+    //現在のパスを輪郭表示する
+    context.stroke();
+  }
+
+    function drawPetal(){
+    }
+
+    // 画像のパラメーターを設定
+    function setImages(){
+      for(var i = 0;i < imgCnt;i++){
+        imgArray.push({
+          "posx": Math.random()*cvsw,     // 初期表示位置x
+          "posy": Math.random()*cvsh,     // 初期表示位置y
+          // "sizew": imgBaseSizeW,          // 画像の横幅
+          // "sizeh": imgBaseSizeH,          // 画像の縦幅
+        });
+      }
+    }
+
+    // 描画、パラメーターの更新
+    var i = 0;
+    function flow(){
+      // ctx.clearRect(0,0,cvsw,cvsh);
+      // for(i = 0;i < imgCnt;i++){
+      //   imgArray[i].posy += 1;
+      //   ctx.drawImage(img, imgArray[i].posx, imgArray[i].posy, imgArray[i].sizew , imgArray[i].sizeh);
+      //   // 範囲外に描画された画像を上に戻す
+      //   if(imgArray[i].posy >= cvsh){
+      //     imgArray[i].posy = -imgArray[i].sizeh;
+      //   }
+      // }
+    }
+
+    function flow_start(){
+      setImages();
+      setInterval(flow,10);
+    }
+  </script> -->
+<script type="text/javascript" src="./js/LZWEncoder.js"></script>
+<script type="text/javascript" src="./js/NeuQuant.js"></script>
+<script type="text/javascript" src="./js/GIFEncoder.js"></script>
+<script type="text/javascript" src="./js/b64.js"></script>
+<link rel="stylesheet" href="./css/bulma.min.css">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+</head>
+<body>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        furikake
+      </h1>
+      <h2 class="subtitle">
+        Seasoning for your illustrations
+      </h2>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="box content">
+      <!-- お知らせゾーン -->
+      <div class="notification is-primary">
+        GIF生成に少し時間がかかります
+      </div>
+      <h2 class="title is-3">1.設定</h2>
+      <div class="file">
+        <label class="file-label">
+          <input class="file-input" type="file" id="file" accept="image/png, image/jpeg">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              画像を選択
+            </span>
+          </span>
+        </label>
+      </div>
+      <div class="control">
+        <input type="range" min="1" max="5" list="tlist">
+        <datalist id="tlist">
+          <option value="2"></option>
+          <option value="3"></option>
+          <option value="4"></option>
+        </datalist>
+      </div>
+      <div class="control">
+        <label class="radio">
+          <input type="radio" name="speed" checked>
+          ふつう
+        </label>
+        <label class="radio">
+          <input type="radio" name="speed">
+          はやめ
+        </label>
+      </div>
+      <button class="button">
+        <span>この設定でふりかける</span>
+      </button>
+      <!-- 描画エリア -->
+      <canvas id="canvas" width="800px" height="500px" style="display: none;"></canvas>
+
+      <div class="buttons">
+        <button class="button is-link is-fullwidth" onclick="convertToGif();">ダウンロード(GIF)</button>
+        <a href="http://twitter.com/share?url=https://example.com&text=&hashtags=furikake" class="twitter-share-button button is-fullwidth">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+          <span>Twitterに投稿</span>
+        </a>
+        <button class="button is-fullwidth">
+          <span class="icon">
+            <i class="fab fa-instagram"></i>
+          </span>
+          <span>Instagramに投稿</span>
+        </button>
+        <button class="button is-fullwidth">
+          <span class="icon">
+            <i class="fas fa-cogs"></i>
+          </span>
+          <span>設定を変えてみる</span>
+        </button>
+      </div>
+    </div>
+  <div>
+</section>
+<footer class="footer">
+  <p>
+    <strong>Footer</strong>
+  </p>
+</footer>
+<script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>
