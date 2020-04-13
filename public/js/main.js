@@ -1,29 +1,5 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-// function drawHalfPetal(ctx, beginx, beginy) {
-//   // size変えると終点ずれる）
-//   var size = 30;
-//   var color = '#ffb7c5'
-
-//   ctx.moveTo(beginx, beginy);
-//   ctx.arcTo(beginx + size, beginy, beginx + size, beginy + size, 30);
-//   ctx.arcTo(beginx, beginx + size, beginx, beginy, 30);
-//   ctx.fillStyle = color;
-//   ctx.fill();
-// }
-
-// function drawPetal(ctx, beginx, beginy) {
-//   // レモン型を2枚ずらして重ねて先端が欠けた花びらの形を作る
-//   ctx.beginPath();
-//   drawHalfPetal(ctx, beginx, beginy);
-//   ctx.rotate(10 * Math.PI / 180);
-//   drawHalfPetal(ctx, beginx, beginy);
-// }
-
-// drawPetal(ctx, 0, 0);
-// drawPetal(ctx, 100, 100);
-// drawPetal(ctx, 300, 100); // 変になる(^p^)
-
 // 画像使うパターン
 // @see https://www.otwo.jp/blog/canvas_sakura/
 var flakeCount = 20;      // 描画する画像の数
@@ -110,12 +86,12 @@ function setImages(){
     // 画像サイズに掛けるアスペクト比を0.5~1.5倍でランダムで生成
     aspect = Math.random()*(aspectMax-aspectMin)+aspectMin;
     imgArray.push({
-      "posx": Math.random()*canvasWidth,   // 初期表示位置x
-      "posy": Math.random()*canvasHeight,   // 初期表示位置y
-      "sizew": imgBaseWidth*aspect, // 画像の横幅
-      "sizeh": imgBaseHeight*aspect, // 画像の縦幅
-      "speedy": Math.random()*(speedMax-speedMin)+speedMin,　// 画像が落ちていく速度
-      "angle": Math.random()*360,   // 角度
+      "posx": Math.random()*canvasWidth,
+      "posy": Math.random()*canvasHeight,
+      "sizew": imgBaseWidth*aspect,
+      "sizeh": imgBaseHeight*aspect,
+      "speedy": Math.random()*(speedMax-speedMin)+speedMin,
+      "angle": Math.random()*360,
     });
   }
 }
@@ -147,7 +123,6 @@ function flow(){
 function convertToGif() {
   // var binary_gif = encoder.stream().getData() //notice this is different from the as3gif package!
   // var data_url = 'data:image/gif;base64,'+encode64(binary_gif);
-
   // ダウンロード
   encoder.download("download.gif");
 }
